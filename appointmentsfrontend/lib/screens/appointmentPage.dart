@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:appointmentsfrontend/components/scheduleCard.dart';
 import 'package:appointmentsfrontend/utils/config.dart';
 import 'package:flutter/material.dart';
 
@@ -13,50 +14,50 @@ class AppointmentPage extends StatefulWidget {
 enum FilterStatus { upcoming, complete, cancel }
 
 class _AppointmentPage extends State<AppointmentPage> {
-  FilterStatus filterStatus = FilterStatus.upcoming;
+  FilterStatus status = FilterStatus.upcoming;
   Alignment _alignment = Alignment.centerLeft;
   List<dynamic> schedules = [
     {
       'doctorName': 'Hessah Fahad',
       'doctorProfile': 'assets/google.png',
       'category': 'Dental',
-      'status': FilterStatus.upcoming
+      'status': FilterStatus.upcoming,
     },
     {
       'doctorName': 'Sara Fahad',
       'doctorProfile': 'assets/google.png',
       'category': 'Dental',
-      'status': FilterStatus.complete
+      'status': FilterStatus.complete,
     },
     {
       'doctorName': 'Nora Fahad',
       'doctorProfile': 'assets/google.png',
       'category': 'Dental',
-      'status': FilterStatus.upcoming
+      'status': FilterStatus.upcoming,
     },
     {
       'doctorName': 'Asms Fahad',
       'doctorProfile': 'assets/google.png',
       'category': 'Dental',
-      'status': FilterStatus.cancel
+      'status': FilterStatus.cancel,
     },
   ];
   @override
   Widget build(BuildContext context) {
-    // List<dynamic> filteredSchedules = schedules.where((var schedule) {
-    //   switch (schedule['status']) {
-    //     case 'upcoming':
-    //       schedule['status'] = FilterStatus.upcoming;
-    //       break;
-    //     case 'complete':
-    //       schedule['status'] = FilterStatus.complete;
-    //       break;
-    //     case 'cancel':
-    //       schedule['status'] = FilterStatus.cancel;
-    //       break;
-    //   }
-    //   return schedule['status'];
-    // }).toList();
+    List<dynamic> filteredSchedules = schedules.where((var schedules) {
+      // switch (schedules['status']) {
+      //   case 'upcoming':
+      //     schedules['status'] = FilterStatus.upcoming;
+      //     break;
+      //   case 'complete':
+      //     schedules['status'] = FilterStatus.complete;
+      //     break;
+      //   case 'cancel':
+      //     schedules['status'] = FilterStatus.cancel;
+      //     break;
+      // }
+      return schedules['status'] == status;
+    }).toList();
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
@@ -87,17 +88,29 @@ class _AppointmentPage extends State<AppointmentPage> {
                             onTap: () {
                               setState(
                                 () {
+                                  print('dddddddd');
+                                  print(filterStatus);
+
                                   if (filterStatus == FilterStatus.upcoming) {
-                                    filterStatus = FilterStatus.upcoming;
+                                    status = FilterStatus.upcoming;
                                     _alignment = Alignment.centerLeft;
+                                    print('eee');
+                                    print(status);
+                                    print(filterStatus);
                                   } else if (filterStatus ==
                                       FilterStatus.complete) {
-                                    filterStatus = FilterStatus.complete;
+                                    status = FilterStatus.complete;
                                     _alignment = Alignment.center;
+                                    print('www');
+                                    print(status);
+                                    print(filterStatus);
                                   } else if (filterStatus ==
                                       FilterStatus.cancel) {
-                                    filterStatus = FilterStatus.cancel;
+                                    status = FilterStatus.cancel;
                                     _alignment = Alignment.centerRight;
+                                    print('ooo');
+                                    print(status);
+                                    print(filterStatus);
                                   }
                                 },
                               );
@@ -112,7 +125,7 @@ class _AppointmentPage extends State<AppointmentPage> {
                 ),
                 AnimatedAlign(
                   alignment: _alignment,
-                  duration: Duration(milliseconds: 200),
+                  duration: const Duration(milliseconds: 200),
                   child: Container(
                     width: 100,
                     height: 40,
@@ -120,7 +133,7 @@ class _AppointmentPage extends State<AppointmentPage> {
                       color: Config.primaryColor,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Center(child: Text(filterStatus.name)),
+                    child: Center(child: Text(status.name)),
                   ),
                 ),
               ],
@@ -128,10 +141,10 @@ class _AppointmentPage extends State<AppointmentPage> {
             Config.spaceSmall,
             Expanded(
               child: ListView.builder(
-                itemCount: schedules.length,
+                itemCount: filteredSchedules.length,
                 itemBuilder: (context, index) {
-                  var _schedule = schedules[index];
-                  bool isLastElement = schedules.length + 1 == index;
+                  var _schedule = filteredSchedules[index];
+                  bool isLastElement = filteredSchedules.length + 1 == index;
                   return Card(
                     shape: RoundedRectangleBorder(
                       side: const BorderSide(
@@ -147,27 +160,68 @@ class _AppointmentPage extends State<AppointmentPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Row(children: [
-                            CircleAvatar(
-                              backgroundImage:
-                                  AssetImage(_schedule['doctorProfile']),
-                            ),
-                            Config.spaceSmall,
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  _schedule['doctorName'],
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700),
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage:
+                                    AssetImage(_schedule['doctorProfile']),
+                              ),
+                              Config.spaceSmall,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _schedule['doctorName'],
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    _schedule['category'],
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          Config.space,
+                          const ScheduleCard(),
+                          Config.space,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.red),
+                                  onPressed: () {},
+                                  child: const Text(
+                                    'Cancel',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
-                                SizedBox(
-                                  height: 5,
-                                )
-                              ],
-                            )
-                          ])
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Config.primaryColor),
+                                  onPressed: () {},
+                                  child: const Text(
+                                    'Reschedule',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),

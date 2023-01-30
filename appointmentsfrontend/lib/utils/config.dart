@@ -22,6 +22,9 @@ class Config {
   static const spaceSmall = SizedBox(
     height: 25,
   );
+  static const space = SizedBox(
+    height: 10,
+  );
   static SizedBox spaceMedium = SizedBox(
     height: (screenHight ?? 400) * 0.05,
   );
