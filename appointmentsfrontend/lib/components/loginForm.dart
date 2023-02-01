@@ -1,6 +1,10 @@
 import 'package:appointmentsfrontend/components/button.dart';
+import 'package:appointmentsfrontend/model/authModel.dart';
+import 'package:appointmentsfrontend/provider/dioProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../main.dart';
 import '../utils/config.dart';
 
 class LoginForm extends StatefulWidget {
@@ -64,13 +68,25 @@ class _LoginForm extends State<LoginForm> {
             ), // Icon // IconButton // Input Decoration
           ),
           Config.spaceSmall,
-          Button(
-              width: double.infinity,
-              title: 'Sign In',
-              onPressed: () {
-                Navigator.of(context).pushNamed('main');
-              },
-              disable: false)
+          Consumer<AuthModel>(
+            builder: ((context, auth, child) {
+              return Button(
+                  width: double.infinity,
+                  title: 'Sign In',
+                  onPressed: () async {
+                    final token = await DioProvider()
+                        .getToken(_emailController.text, _passController.text);
+                    if (token) {
+                      auth.loginSuccess();
+                      MyApp.navigationKey.currentState?.pushNamed('main');
+                    }
+                    final user = await DioProvider().getUser(token);
+                    print(user);
+                    print(token);
+                  },
+                  disable: false);
+            }),
+          )
         ],
       ),
     );

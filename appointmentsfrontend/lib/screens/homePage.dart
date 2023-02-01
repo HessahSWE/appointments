@@ -1,8 +1,14 @@
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:appointmentsfrontend/components/appointmentCard.dart';
 import 'package:appointmentsfrontend/components/doctorCard.dart';
+import 'package:appointmentsfrontend/provider/dioProvider.dart';
 import 'package:appointmentsfrontend/utils/config.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,6 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+  Map<String, dynamic> user = {};
   List<Map<String, dynamic>> medCat = [
     {
       'icon': FontAwesomeIcons.userDoctor,
@@ -38,6 +45,20 @@ class _HomePage extends State<HomePage> {
       'category': 'Dental',
     }
   ];
+
+  Future<void> getData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token') ?? '';
+    if (token.isNotEmpty && token != '') {
+      final response = await DioProvider().getUser(token);
+      if (response != null) {
+        setState(() {
+          user = json.decode(response);
+          print(user);
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +144,9 @@ class _HomePage extends State<HomePage> {
                 Config.spaceSmall,
                 Column(
                   children: List.generate(10, (index) {
-                    return const DoctorCard();
+                    return const DoctorCard(
+                      route: 'docDetails',
+                    );
                   }),
                 )
               ],
