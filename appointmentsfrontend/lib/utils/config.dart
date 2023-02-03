@@ -26,10 +26,10 @@ class Config {
     height: 10,
   );
   static SizedBox spaceMedium = SizedBox(
-    height: (screenHight ?? 400) * 0.05,
+    height: screenHight! * 0.05,
   );
   static SizedBox spaceBig = SizedBox(
-    height: (screenHight ?? 400) * 0.08,
+    height: screenHight! * 0.08,
   );
   static const outlinedBorder = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(8)),
