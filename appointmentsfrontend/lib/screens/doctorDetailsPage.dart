@@ -6,13 +6,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../components/button.dart';
 
-class DoctorDetails extends StatefulWidget {
-  const DoctorDetails({super.key});
+class DoctorDetailsPage extends StatefulWidget {
+  const DoctorDetailsPage({super.key});
   @override
-  State<DoctorDetails> createState() => _DoctorDetails();
+  State<DoctorDetailsPage> createState() => _DoctorDetailsPage();
 }
 
-class _DoctorDetails extends State<DoctorDetails> {
+class _DoctorDetailsPage extends State<DoctorDetailsPage> {
   bool isFav = false;
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,9 @@ class _DoctorDetails extends State<DoctorDetails> {
               width: double.infinity,
               title: 'Book Appointment',
               disable: false,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed('bookingPage');
+              },
             ),
           )
         ],

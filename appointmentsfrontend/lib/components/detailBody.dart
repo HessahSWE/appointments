@@ -15,14 +15,14 @@ class DetailBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Config.spaceSmall,
-          DoctorInfo(),
+          const DoctorInfo(),
           Config.spaceMedium,
-          Text(
+          const Text(
             'About Doctor',
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
           ),
           Config.spaceSmall,
-          Text(
+          const Text(
             'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj',
             style: TextStyle(
               fontWeight: FontWeight.w500,

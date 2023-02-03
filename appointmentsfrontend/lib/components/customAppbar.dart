@@ -22,10 +22,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
     return AppBar(
       automaticallyImplyLeading: true,
       backgroundColor: Colors.white,
+      centerTitle: true,
       elevation: 0,
       title: Text(
         widget.appTitle ?? '',
-        style: const TextStyle(fontSize: 20, color: Colors.black),
+        style: const TextStyle(
+          fontSize: 20,
+          color: Colors.black,
+        ),
       ),
       leading: widget.icon != null
           ? Container(

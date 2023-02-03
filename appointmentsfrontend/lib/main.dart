@@ -1,7 +1,9 @@
 import 'package:appointmentsfrontend/mainLayout.dart';
 import 'package:appointmentsfrontend/model/authModel.dart';
 import 'package:appointmentsfrontend/screens/authPage.dart';
-import 'package:appointmentsfrontend/screens/doctorDetails.dart';
+import 'package:appointmentsfrontend/screens/bookingPage.dart';
+import 'package:appointmentsfrontend/screens/doctorDetailsPage.dart';
+import 'package:appointmentsfrontend/screens/successBooked.dart';
 import 'package:appointmentsfrontend/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +49,9 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const AuthPage(),
           'main': (context) => const MainLayout(),
-          'docDetails': ((context) => const DoctorDetails())
+          'docDetails': (context) => const DoctorDetailsPage(),
+          'bookingPage': (context) => const BookingPage(),
+          'successBooked': (context) => const SuccessBooked()
         },
       ),
     );
