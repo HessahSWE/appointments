@@ -1,3 +1,4 @@
+import 'package:appointmentsfrontend/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -15,7 +16,8 @@ class SuccessBooked extends StatelessWidget {
           children: <Widget>[
             Expanded(
               flex: 3,
-              child: Image.asset('assets/google.png'),
+              child: Lottie.asset('assets/check-circle.json',
+                  width: 200, fit: BoxFit.contain),
             ),
             Container(
               width: double.infinity,
@@ -30,14 +32,15 @@ class SuccessBooked extends StatelessWidget {
             ),
             const Spacer(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 60),
               child: Button(
                 width: double.infinity,
                 title: 'Back to Home Page',
                 onPressed: () => Navigator.of(context).pushNamed('main'),
                 disable: false,
               ),
-            )
+            ),
+            Config.spaceMedium,
           ],
         ),
       ),
