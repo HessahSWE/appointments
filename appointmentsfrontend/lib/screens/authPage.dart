@@ -1,4 +1,5 @@
 import 'package:appointmentsfrontend/components/loginForm.dart';
+import 'package:appointmentsfrontend/components/registerForm.dart';
 import 'package:flutter/material.dart';
 
 import '../components/SocialButton.dart';
@@ -13,6 +14,7 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPage extends State<AuthPage> {
+  bool isRegister = false;
   @override
   Widget build(BuildContext context) {
     Config().init(context);
@@ -32,18 +34,20 @@ class _AuthPage extends State<AuthPage> {
                 style: const TextStyle(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
-                ), // TextStyle
-              ), // Text
+                ),
+              ),
               Config.spaceSmall,
               Text(
-                AppText.enText['signIn_text']!,
+                isRegister
+                    ? AppText.enText['signIn_text']!
+                    : AppText.enText['signUp_text']!,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Config.spaceSmall,
-              const LoginForm(),
+              isRegister ? const LoginForm() : const RegisterPage(),
               Config.spaceSmall,
               Center(
                 child: TextButton(

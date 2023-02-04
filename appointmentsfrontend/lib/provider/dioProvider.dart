@@ -26,7 +26,7 @@ class DioProvider {
     }
   }
 
-  Future<dynamic> getUser() async {
+  Future<dynamic> getUser(String token) async {
     try {
       var user = await Dio().get('http://192.168.8.162:8000/api/login',
           options: Options(headers: {'Authorization': 'bearer'}));

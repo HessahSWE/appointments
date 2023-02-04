@@ -1,21 +1,22 @@
-import 'package:appointmentsfrontend/components/button.dart';
-import 'package:appointmentsfrontend/model/authModel.dart';
-import 'package:appointmentsfrontend/provider/dioProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'button.dart';
 import '../main.dart';
+import '../model/authModel.dart';
+import '../provider/dioProvider.dart';
 import '../utils/config.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginForm> createState() => _LoginForm();
+  State<RegisterPage> createState() => _RegisterPage();
 }
 
-class _LoginForm extends State<LoginForm> {
-  final _formKey = GlobalKey();
+class _RegisterPage extends State<RegisterPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailControl = TextEditingController();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
   bool obscurePass = true;
@@ -31,10 +32,23 @@ class _LoginForm extends State<LoginForm> {
             keyboardType: TextInputType.emailAddress,
             cursorColor: Config.primaryColor,
             decoration: const InputDecoration(
-              hintText: 'Email Address',
-              labelText: 'Email',
+              hintText: 'username',
+              labelText: 'username',
               alignLabelWithHint: true,
-              prefixIcon: Icon(Icons.email_outlined),
+              prefixIcon: Icon(Icons.person),
+              prefixIconColor: Config.primaryColor,
+            ),
+          ),
+          Config.spaceSmall,
+          TextFormField(
+            controller: _emailController,
+            keyboardType: TextInputType.emailAddress,
+            cursorColor: Config.primaryColor,
+            decoration: const InputDecoration(
+              hintText: 'email',
+              labelText: 'email',
+              alignLabelWithHint: true,
+              prefixIcon: Icon(Icons.person),
               prefixIconColor: Config.primaryColor,
             ),
           ),
@@ -72,7 +86,7 @@ class _LoginForm extends State<LoginForm> {
             builder: ((context, auth, child) {
               return Button(
                   width: double.infinity,
-                  title: 'Sign In',
+                  title: 'Sign Up',
                   onPressed: () async {
                     final token = await DioProvider()
                         .getToken(_emailController.text, _passController.text);
