@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('category')->nullable();
             $table->string('patients')->nullable();
             $table->string('experience')->nullable();
-            $table->string('bio_data')->nullable();
+            $table->string('bio')->nullable();
             $table->string('status')->nullable();
             $table->foreign('doc_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

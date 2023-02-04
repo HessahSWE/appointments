@@ -13,7 +13,7 @@ class Doctor extends Model
         'category',
         'patients',
         'experience',
-        'bio_data',
+        'bio',
         'status'
     ];
 

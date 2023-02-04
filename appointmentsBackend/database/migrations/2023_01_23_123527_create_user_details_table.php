@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->unique();
-            $table->string('bio_data')->nullable();
+            $table->string('bio')->nullable();
             $table->string('status')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
