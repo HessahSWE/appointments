@@ -37,4 +37,24 @@ class DioProvider {
       return error;
     }
   }
+
+  Future<dynamic> registerUser(
+      String username, String email, String password) async {
+    try {
+      var response = await Dio().post(
+        'http://192.168.8.162:8000/api/register',
+        data: {'name': username, 'email': email, 'password': password},
+        options: Options(
+            contentType: 'application/json',
+            headers: {"Accept": "application/json"}),
+      );
+      if (response.statusCode == 200 && response.data != '') {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      return error;
+    }
+  }
 }

@@ -16,7 +16,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPage extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
-  final _emailControl = TextEditingController();
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
   bool obscurePass = true;
@@ -88,20 +88,20 @@ class _RegisterPage extends State<RegisterPage> {
                   width: double.infinity,
                   title: 'Sign Up',
                   onPressed: () async {
-                    final token = await DioProvider()
-                        .getToken(_emailController.text, _passController.text);
-                    print('ssssssssssssssssss1');
-                    print(token);
-                    print('ssssssssssssssssss1');
-                    if (token) {
-                      auth.loginSuccess();
-                      MyApp.navigationKey.currentState?.pushNamed('main');
+                    final userRegistration = await DioProvider().registerUser(
+                        _nameController.text,
+                        _emailController.text,
+                        _passController.text);
+                    if (userRegistration) {
+                      final token = await DioProvider().getToken(
+                          _emailController.text, _passController.text);
+                      if (token) {
+                        auth.loginSuccess();
+                        MyApp.navigationKey.currentState?.pushNamed('main');
+                      }
+                    } else {
+                      print('register not successful');
                     }
-                    final user = await DioProvider().getUser(token);
-                    print('ssssssssssssssssss');
-                    print(user);
-                    print('ssssssssssssssssss');
-                    // Navigator.of(context).pushNamed('docDetails');
                   },
                   disable: false);
             }),
