@@ -47,7 +47,7 @@ class _AuthPage extends State<AuthPage> {
                 ),
               ),
               Config.spaceSmall,
-              isRegister ? const LoginForm() : const RegisterPage(),
+              !isRegister ? const LoginForm() : const RegisterPage(),
               Config.spaceSmall,
               Center(
                 child: TextButton(

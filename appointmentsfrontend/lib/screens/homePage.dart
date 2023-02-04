@@ -1,11 +1,8 @@
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:appointmentsfrontend/components/appointmentCard.dart';
 import 'package:appointmentsfrontend/components/doctorCard.dart';
 import 'package:appointmentsfrontend/provider/dioProvider.dart';
 import 'package:appointmentsfrontend/utils/config.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,11 +50,18 @@ class _HomePage extends State<HomePage> {
       final response = await DioProvider().getUser(token);
       if (response != null) {
         setState(() {
+          print('ttttttttttttttttttttttttt');
+          print(json.decode(response));
           user = json.decode(response);
-          print(user);
         });
       }
     }
+  }
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
   }
 
   @override

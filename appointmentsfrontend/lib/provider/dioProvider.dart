@@ -28,9 +28,11 @@ class DioProvider {
 
   Future<dynamic> getUser(String token) async {
     try {
-      var user = await Dio().get('http://192.168.8.162:8000/api/login',
-          options: Options(headers: {'Authorization': 'bearer'}));
+      var user = await Dio().get('http://192.168.8.162:8000/api/user',
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
       if (user.statusCode == 200 && user.data != '') {
+        print(json.encode(user.data));
+        print('kkkkkkkkkkkkkkkkkkkk');
         return json.encode(user.data);
       }
     } catch (error) {
@@ -48,7 +50,7 @@ class DioProvider {
             contentType: 'application/json',
             headers: {"Accept": "application/json"}),
       );
-      if (response.statusCode == 200 && response.data != '') {
+      if (response.statusCode == 201 && response.data != '') {
         return true;
       } else {
         return false;

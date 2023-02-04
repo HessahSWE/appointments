@@ -28,8 +28,8 @@ class _RegisterPage extends State<RegisterPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           TextFormField(
-            controller: _emailController,
-            keyboardType: TextInputType.emailAddress,
+            controller: _nameController,
+            keyboardType: TextInputType.text,
             cursorColor: Config.primaryColor,
             decoration: const InputDecoration(
               hintText: 'username',
@@ -92,6 +92,9 @@ class _RegisterPage extends State<RegisterPage> {
                         _nameController.text,
                         _emailController.text,
                         _passController.text);
+                    print('kkkkkkkkkkkkkkk');
+                    print(userRegistration);
+                    print('kkkkkkkkkkkkkkk');
                     if (userRegistration) {
                       final token = await DioProvider().getToken(
                           _emailController.text, _passController.text);
