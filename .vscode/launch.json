@@ -1,0 +1,28 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "appointmentsfrontend",
+      "cwd": "appointmentsfrontend",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "appointmentsfrontend (profile mode)",
+      "cwd": "appointmentsfrontend",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "appointmentsfrontend (release mode)",
+      "cwd": "appointmentsfrontend",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    }
+  ]
+}

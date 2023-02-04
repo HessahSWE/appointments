@@ -10,7 +10,7 @@ use Illuminate\Validation\ValidationException;
 
 class UsersController extends Controller
 {
-    
+
   /**
    * Display a listing of the resource.
    *
@@ -57,7 +57,7 @@ class UsersController extends Controller
       'password' => 'required'
     ]);
     $user = User::where('email', $request->email)->first();
-    if (!$user || !Hash::check($request->password, $user->password)) {
+    if (!$user || ! Hash::check($request->password, $user->password)) {
       throw ValidationException::withMessages([
         'email' => ['The provided credentials are incorrect']
       ]);

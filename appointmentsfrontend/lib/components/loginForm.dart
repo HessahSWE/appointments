@@ -74,16 +74,20 @@ class _LoginForm extends State<LoginForm> {
                   width: double.infinity,
                   title: 'Sign In',
                   onPressed: () async {
-                    // final token = await DioProvider()
-                    //     .getToken(_emailController.text, _passController.text);
-                    // if (token) {
-                    //   auth.loginSuccess();
-                    //   MyApp.navigationKey.currentState?.pushNamed('main');
-                    // }
-                    // final user = await DioProvider().getUser(token);
-                    // print(user);
-                    // print(token);
-                    Navigator.of(context).pushNamed('docDetails');
+                    final token = await DioProvider()
+                        .getToken(_emailController.text, _passController.text);
+                    print('ssssssssssssssssss1');
+                    print(token);
+                    print('ssssssssssssssssss1');
+                    if (token) {
+                      auth.loginSuccess();
+                      MyApp.navigationKey.currentState?.pushNamed('main');
+                    }
+                    final user = await DioProvider().getUser();
+                    print('ssssssssssssssssss');
+                    print(user);
+                    print('ssssssssssssssssss');
+                    // Navigator.of(context).pushNamed('docDetails');
                   },
                   disable: false);
             }),
